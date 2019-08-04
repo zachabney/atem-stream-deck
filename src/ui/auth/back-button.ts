@@ -1,5 +1,5 @@
 import app from '../../app'
-import ControlScreen from '../control/controlScreen'
+import ControlScreen from '../control/control-screen'
 import { ImageSize } from 'tile-ui'
 import { StreamDeckButton } from 'stream-deck-tile-ui'
 

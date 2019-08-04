@@ -1,9 +1,10 @@
 import { install } from 'source-map-support'
 install()
 
-import Config from './config'
+require('./config')
+
 import { openStreamDeck } from 'elgato-stream-deck'
-import ControlScreen from './ui/control/controlScreen'
+import ControlScreen from './ui/control/control-screen'
 import { DARK_GRAY } from './ui/colors'
 import { StreamDeckUIController, StreamDeckImageLoader } from 'stream-deck-tile-ui'
 
@@ -21,9 +22,6 @@ export class App {
     console.log('Controller initialized')
   }
 }
-
-// log and kill process if there's a config error
-Config.validate()
 
 const streamDeck = openStreamDeck()
 

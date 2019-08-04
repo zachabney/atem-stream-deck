@@ -1,12 +1,16 @@
-import BackButton from './backButton'
-import NumericButton from './numericButton'
+import BackButton from './back-button'
+import NumericButton from './numeric-button'
 import { StreamDeckScreen, StreamDeckTile } from 'stream-deck-tile-ui'
+import config from '../../config'
+
+type NumericTile = StreamDeckTile & { button: NumericButton }
 
 export default class AuthScreen extends StreamDeckScreen {
-  private numericCode: number[] = [9, 7, 3, 1]
+  private numericCode: number[] = config.authCode
   private enteredCode: number[] = []
 
-  private handleNumericInput = (number: number) => {
+  private handleNumericInput = (button: NumericButton) => {
+    const number = button.number
     this.enteredCode.push(number)
 
     if (this.enteredCode.length === this.numericCode.length) {
@@ -21,11 +25,7 @@ export default class AuthScreen extends StreamDeckScreen {
     }
   }
 
-  private tiles: StreamDeckTile[] = [
-    {
-      index: 10,
-      button: new BackButton()
-    },
+  private numericTiles: NumericTile[] = [
     {
       index: 2,
       button: new NumericButton(1, this.handleNumericInput)
@@ -51,6 +51,10 @@ export default class AuthScreen extends StreamDeckScreen {
       button: new NumericButton(6, this.handleNumericInput)
     },
     {
+      index: 11,
+      button: new NumericButton(0, this.handleNumericInput)
+    },
+    {
       index: 12,
       button: new NumericButton(7, this.handleNumericInput)
     },
@@ -64,14 +68,21 @@ export default class AuthScreen extends StreamDeckScreen {
     }
   ]
 
+  private tiles: StreamDeckTile[] = [
+    {
+      index: 10,
+      button: new BackButton()
+    },
+    ...this.numericTiles
+  ]
+
   private showBadError() {
     this.clearEnteredCode()
-    console.log('BAD')
+    this.numericTiles.forEach(numericTile => numericTile.button.showError(1000))
   }
 
   private showSuccess() {
     this.clearEnteredCode()
-    console.log('GOOD')
   }
 
   private clearEnteredCode() {

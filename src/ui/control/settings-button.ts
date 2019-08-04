@@ -1,5 +1,5 @@
 import app from '../../app'
-import AuthScreen from '../auth/authScreen'
+import AuthScreen from '../auth/auth-screen'
 import { ImageSize } from 'tile-ui'
 import { StreamDeckButton } from 'stream-deck-tile-ui'
 
