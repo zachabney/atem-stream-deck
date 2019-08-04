@@ -1,3 +1,6 @@
+import { install } from 'source-map-support'
+install()
+
 import Config from './config'
 import { openStreamDeck } from 'elgato-stream-deck'
 import { StreamDeckUIController } from './streamDeck/stream-deck-ui-controller'

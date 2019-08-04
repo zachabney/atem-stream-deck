@@ -1,7 +1,7 @@
 import sharp from 'sharp'
 import path from 'path'
-import ImageSize from './image-size';
-import RGBColor from './rgb-color';
+import ImageSize from './image-size'
+import RGBColor from './rgb-color'
 
 export const DEFAULT_BG_COLOR: RGBColor = { r: 24, g: 24, b: 24 } // dark gray
 
@@ -26,6 +26,8 @@ export default class Image {
     if (imageKey in Image.imageCache) {
       return Image.imageCache[imageKey]
     }
+
+    console.log(`LOADING IMAGE ${imageKey}`)
 
     // load from file system
     const buffer = await sharp(path.resolve(assetPath))

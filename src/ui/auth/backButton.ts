@@ -13,7 +13,7 @@ export default class BackButton extends Button {
     console.log('BACK RELEASED')
   }
 
-  async getImage(size: ImageSize): Promise<Image> {
+  async render(size: ImageSize): Promise<Image> {
     return await Image.load('assets/Back Arrow.png', size)
   }
 }

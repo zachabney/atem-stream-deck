@@ -7,8 +7,6 @@ import ImageSize from './image/image-size'
 export default abstract class UIController implements ScreenRenderer {
   currentScreen: Screen | null = null
 
-  private tileImages: Image[] = []
-
   abstract renderImage(index: number, image: Image): any
   abstract clearImage(index: number): any
 
@@ -31,19 +29,17 @@ export default abstract class UIController implements ScreenRenderer {
     }
   }
 
-  private async updateTile(tile: Tile) {
-    // check if the image changes
-    const imageSize = this.getTileImageSize(tile.index)
-    const newImage = await tile.button.getImage(imageSize)
-
-    if (this.tileImages[tile.index] !== newImage) {
-      this.setImage(tile.index, newImage)
-    }
+  async renderTile(tile: Tile) {
+    const size = this.getTileImageSize(tile.index)
+    const image = await tile.button.render(size)
+    this.renderImage(tile.index, image)
   }
 
-  setImage(index: number, image: Image) {
-    this.tileImages[index] = image
-    this.renderImage(index, image)
+  private async updateTile(tile: Tile) {
+    if (tile.button.componentShouldUpdate) {
+      tile.button.onComponentUpdate()
+      this.renderTile(tile)
+    }
   }
 
   getTile(index: number): Tile | undefined {
@@ -51,31 +47,14 @@ export default abstract class UIController implements ScreenRenderer {
       return undefined
     }
 
-    const tile = this.currentScreen
-      .getTiles()
-      .find(tile => tile.index === index)
+    const tile = this.currentScreen.getTiles().find(tile => tile.index === index)
 
     return tile
   }
 
-  async setTile(tile: Tile) {
-    const controllerSize = this.getControllerSize()
-    if (tile.index >= 0 && tile.index < controllerSize) {
-      const imageSize = this.getTileImageSize(tile.index)
-      const image = await tile.button.getImage(imageSize)
-      this.setImage(tile.index, image)
-    }
-  }
-
-  clearTile(index: number) {
-    if (this.tileImages[index]) {
-      this.tileImages.splice(index)
-    }
-
-    this.clearImage(index)
-  }
-
   async setScreen(screen: Screen) {
+    await screen.preload(this)
+
     const newTiles = screen.getTiles()
     const oldTiles = this.currentScreen ? this.currentScreen.getTiles() : []
 
@@ -89,9 +68,9 @@ export default abstract class UIController implements ScreenRenderer {
           continue
         }
 
-        await this.setTile(newTile)
+        this.renderTile(newTile)
       } else if (oldTile) {
-        this.clearTile(tileIndex)
+        this.clearImage(tileIndex)
       }
     }
 

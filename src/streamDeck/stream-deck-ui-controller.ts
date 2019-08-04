@@ -12,30 +12,22 @@ export class StreamDeckUIController extends UIController {
 
     this.streamDeck.clearAllKeys()
 
-    this.streamDeck.on('down', this.onDown)
-    this.streamDeck.on('up', this.onUp)
-    this.streamDeck.on('error', this.onError)
-  }
-
-  private onDown(keyIndex: number) {
-    this.emitButtonPress(keyIndex)
-  }
-
-  private onUp(keyIndex: number) {
-    this.emitButtonRelease(keyIndex)
-  }
-
-  private onError(error: any) {
-    console.error('An error occurred with the Stream Deck', error)
+    this.streamDeck.on('down', keyIndex => {
+      this.emitButtonPress(keyIndex)
+    })
+    this.streamDeck.on('up', keyIndex => {
+      this.emitButtonRelease(keyIndex)
+    })
+    this.streamDeck.on('error', error => {
+      console.error(error)
+    })
   }
 
   renderImage(index: number, image: Image) {
-    console.log(`RENDERING IMAGE AT INDEX ${index}`)
     this.streamDeck.fillImage(index, image.data)
   }
 
   clearImage(index: number) {
-    console.log(`CLEARING IMAGE AT INDEX ${index}`)
     this.streamDeck.clearKey(index)
   }
 

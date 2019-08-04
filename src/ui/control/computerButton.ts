@@ -11,7 +11,7 @@ export default class ComputerButton extends Button {
     console.log('COMPUTER RELEASED')
   }
 
-  async getImage(size: ImageSize): Promise<Image> {
+  async render(size: ImageSize) {
     return await Image.load('assets/Computer.png', size)
   }
 }

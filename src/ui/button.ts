@@ -1,8 +1,6 @@
-import Image from './image/image'
-import ImageSize from './image/image-size'
+import Component from './component'
 
-export default abstract class Button {
+export default abstract class Button<T = {}> extends Component<T> {
   onPress() {}
   onRelease() {}
-  abstract getImage(size: ImageSize): Promise<Image>
 }
