@@ -3,8 +3,7 @@ import LogoButton from './logoButton'
 import BlackButton from './blackButton'
 import VolumeButton from './volumeButton'
 import SettingsButton from './settingsButton'
-import StreamDeckTile from '../stream-deck/stream-deck-tile'
-import StreamDeckScreen from '../stream-deck/stream-deck-screen'
+import { StreamDeckScreen, StreamDeckTile } from 'stream-deck-tile-ui'
 
 export default class ControlScreen extends StreamDeckScreen {
   private tiles: StreamDeckTile[] = [

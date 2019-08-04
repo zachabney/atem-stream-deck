@@ -4,6 +4,7 @@
   "description": "Stream Deck controller for an ATEM switcher",
   "main": "dist/app.js",
   "scripts": {
+    "build": "tsc",
     "start": "tsc && node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,17 +19,16 @@
   },
   "homepage": "https://github.com/zachabney/atem-stream-deck#readme",
   "dependencies": {
-    "@julusian/jpeg-turbo": "^0.5.2",
     "atem-connection": "^0.10.0",
     "dotenv": "^8.0.0",
     "elgato-stream-deck": "^3.0.0",
-    "sharp": "^0.23.0",
-    "source-map-support": "^0.5.13"
+    "source-map-support": "^0.5.13",
+    "stream-deck-tile-ui": "file:../stream-deck-tile-ui",
+    "tile-ui": "file:../tile-ui"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
     "@types/node-hid": "^0.7.2",
-    "@types/sharp": "^0.22.2",
     "@types/source-map-support": "^0.5.0",
     "prettier": "^1.18.2",
     "typescript": "^3.5.3"

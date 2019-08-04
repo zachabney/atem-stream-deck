@@ -3,9 +3,9 @@ install()
 
 import Config from './config'
 import { openStreamDeck } from 'elgato-stream-deck'
-import { StreamDeckUIController } from './ui/stream-deck/stream-deck-ui-controller'
-import StreamDeckImageLoader from './ui/stream-deck/stream-deck-image-loader'
 import ControlScreen from './ui/control/controlScreen'
+import { DARK_GRAY } from './ui/colors'
+import { StreamDeckUIController, StreamDeckImageLoader } from 'stream-deck-tile-ui'
 
 export class App {
   readonly uiController: StreamDeckUIController
@@ -28,7 +28,7 @@ Config.validate()
 const streamDeck = openStreamDeck()
 
 const streamDeckUIController = new StreamDeckUIController(streamDeck)
-const streamDeckImageLoader = new StreamDeckImageLoader()
+const streamDeckImageLoader = new StreamDeckImageLoader(DARK_GRAY)
 const app = new App(streamDeckUIController, streamDeckImageLoader)
 app.start()
 

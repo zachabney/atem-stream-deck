@@ -1,8 +1,7 @@
-import StreamDeckButton from '../stream-deck/stream-deck-button'
-import StreamDeckImage from '../stream-deck/stream-deck-image'
 import { ImageSize } from 'tile-ui'
 import app from '../../app'
 import { RED } from '../colors'
+import { StreamDeckButton, StreamDeckImage } from 'stream-deck-tile-ui'
 
 export type NumericButtonListener = (number: number) => void
 

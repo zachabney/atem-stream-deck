@@ -1,7 +1,6 @@
 import BackButton from './backButton'
 import NumericButton from './numericButton'
-import StreamDeckScreen from '../stream-deck/stream-deck-screen'
-import StreamDeckTile from '../stream-deck/stream-deck-tile'
+import { StreamDeckScreen, StreamDeckTile } from 'stream-deck-tile-ui'
 
 export default class AuthScreen extends StreamDeckScreen {
   private numericCode: number[] = [9, 7, 3, 1]

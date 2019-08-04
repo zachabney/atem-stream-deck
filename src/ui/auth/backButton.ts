@@ -1,7 +1,7 @@
 import app from '../../app'
 import ControlScreen from '../control/controlScreen'
-import StreamDeckButton from '../stream-deck/stream-deck-button'
 import { ImageSize } from 'tile-ui'
+import { StreamDeckButton } from 'stream-deck-tile-ui'
 
 export default class BackButton extends StreamDeckButton {
   onPress() {

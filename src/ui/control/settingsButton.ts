@@ -1,7 +1,7 @@
 import app from '../../app'
 import AuthScreen from '../auth/authScreen'
-import StreamDeckButton from '../stream-deck/stream-deck-button'
 import { ImageSize } from 'tile-ui'
+import { StreamDeckButton } from 'stream-deck-tile-ui'
 
 export default class SettingsButton extends StreamDeckButton {
   onPress() {

@@ -1,6 +1,6 @@
 import app from '../../app'
-import StreamDeckButton from '../stream-deck/stream-deck-button'
 import { ImageSize } from 'tile-ui'
+import { StreamDeckButton } from 'stream-deck-tile-ui'
 
 export default class BlackButton extends StreamDeckButton {
   onPress() {
