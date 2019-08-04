@@ -1,10 +1,9 @@
-import Button from '../button'
-import Image from '../image/image'
 import app from '../../app'
 import AuthScreen from '../auth/authScreen'
-import ImageSize from '../image/image-size'
+import StreamDeckButton from '../stream-deck/stream-deck-button'
+import { ImageSize } from 'tile-ui'
 
-export default class SettingsButton extends Button {
+export default class SettingsButton extends StreamDeckButton {
   onPress() {
     app.uiController.setScreen(new AuthScreen())
   }
@@ -14,6 +13,6 @@ export default class SettingsButton extends Button {
   }
 
   async render(size: ImageSize) {
-    return await Image.load('assets/Settings.png', size)
+    return await app.imageLoader.get('assets/Settings.png', size)
   }
 }

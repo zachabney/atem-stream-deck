@@ -3,15 +3,17 @@ install()
 
 import Config from './config'
 import { openStreamDeck } from 'elgato-stream-deck'
-import { StreamDeckUIController } from './streamDeck/stream-deck-ui-controller'
+import { StreamDeckUIController } from './ui/stream-deck/stream-deck-ui-controller'
+import StreamDeckImageLoader from './ui/stream-deck/stream-deck-image-loader'
 import ControlScreen from './ui/control/controlScreen'
-import UIController from './ui/ui-controller'
 
 export class App {
-  readonly uiController: UIController
+  readonly uiController: StreamDeckUIController
+  readonly imageLoader: StreamDeckImageLoader
 
-  constructor(uiController: UIController) {
+  constructor(uiController: StreamDeckUIController, imageLoader: StreamDeckImageLoader) {
     this.uiController = uiController
+    this.imageLoader = imageLoader
   }
 
   async start() {
@@ -26,7 +28,8 @@ Config.validate()
 const streamDeck = openStreamDeck()
 
 const streamDeckUIController = new StreamDeckUIController(streamDeck)
-const app = new App(streamDeckUIController)
+const streamDeckImageLoader = new StreamDeckImageLoader()
+const app = new App(streamDeckUIController, streamDeckImageLoader)
 app.start()
 
 export default app

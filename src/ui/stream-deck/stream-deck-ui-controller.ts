@@ -1,9 +1,8 @@
 import { StreamDeck } from 'elgato-stream-deck'
-import Image from '../ui/image/image'
-import UIController from '../ui/ui-controller'
-import ImageSize from '../ui/image/image-size'
+import { UIController, ImageSize } from 'tile-ui'
+import StreamDeckImage from './stream-deck-image'
 
-export class StreamDeckUIController extends UIController {
+export class StreamDeckUIController extends UIController<StreamDeckImage> {
   private streamDeck: StreamDeck
 
   constructor(streamDeck: StreamDeck) {
@@ -23,7 +22,7 @@ export class StreamDeckUIController extends UIController {
     })
   }
 
-  renderImage(index: number, image: Image) {
+  renderImage(index: number, image: StreamDeckImage) {
     this.streamDeck.fillImage(index, image.data)
   }
 

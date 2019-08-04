@@ -1,8 +1,8 @@
-import Button from '../button'
-import Image from '../image/image'
-import ImageSize from '../image/image-size'
+import StreamDeckButton from '../stream-deck/stream-deck-button'
+import { ImageSize } from 'tile-ui'
+import app from '../../app'
 
-export default class ComputerButton extends Button {
+export default class ComputerButton extends StreamDeckButton {
   onPress() {
     console.log('COMPUTER PRESSED')
   }
@@ -12,6 +12,6 @@ export default class ComputerButton extends Button {
   }
 
   async render(size: ImageSize) {
-    return await Image.load('assets/Computer.png', size)
+    return await app.imageLoader.get('assets/Computer.png', size)
   }
 }

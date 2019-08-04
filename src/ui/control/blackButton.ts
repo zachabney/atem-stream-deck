@@ -1,8 +1,8 @@
-import Button from '../button'
-import Image from '../image/image'
-import ImageSize from '../image/image-size'
+import app from '../../app'
+import StreamDeckButton from '../stream-deck/stream-deck-button'
+import { ImageSize } from 'tile-ui'
 
-export default class BlackButton extends Button {
+export default class BlackButton extends StreamDeckButton {
   onPress() {
     console.log('BLACK BUTTON')
   }
@@ -12,6 +12,6 @@ export default class BlackButton extends Button {
   }
 
   async render(size: ImageSize) {
-    return await Image.load('assets/Black.png', size)
+    return await app.imageLoader.get('assets/Black.png', size)
   }
 }

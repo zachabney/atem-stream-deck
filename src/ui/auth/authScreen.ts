@@ -1,9 +1,9 @@
-import Screen from '../screen'
-import Tile from '../tile'
 import BackButton from './backButton'
 import NumericButton from './numericButton'
+import StreamDeckScreen from '../stream-deck/stream-deck-screen'
+import StreamDeckTile from '../stream-deck/stream-deck-tile'
 
-export default class AuthScreen extends Screen {
+export default class AuthScreen extends StreamDeckScreen {
   private numericCode: number[] = [9, 7, 3, 1]
   private enteredCode: number[] = []
 
@@ -22,7 +22,7 @@ export default class AuthScreen extends Screen {
     }
   }
 
-  private tiles: Tile[] = [
+  private tiles: StreamDeckTile[] = [
     {
       index: 10,
       button: new BackButton()
@@ -79,7 +79,7 @@ export default class AuthScreen extends Screen {
     this.enteredCode = []
   }
 
-  getTiles(): Tile[] {
+  getTiles(): StreamDeckTile[] {
     return this.tiles
   }
 }

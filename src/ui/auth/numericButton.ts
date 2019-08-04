@@ -1,18 +1,19 @@
-import Button from '../button'
-import Image from '../image/image'
-import { RED } from '../image/rgb-color'
-import ImageSize from '../image/image-size'
+import StreamDeckButton from '../stream-deck/stream-deck-button'
+import StreamDeckImage from '../stream-deck/stream-deck-image'
+import { ImageSize } from 'tile-ui'
+import app from '../../app'
+import { RED } from '../colors'
 
 export type NumericButtonListener = (number: number) => void
 
-export default class NumericButton extends Button<{ isPressed: boolean }> {
+export default class NumericButton extends StreamDeckButton<{ isPressed: boolean }> {
   readonly number: number
 
   private onPressListener?: NumericButtonListener
   private onReleaseListener?: NumericButtonListener
 
-  private initialButtonImage!: Image
-  private pressedButtonImage!: Image
+  private initialButtonImage!: StreamDeckImage
+  private pressedButtonImage!: StreamDeckImage
 
   constructor(
     number: number,
@@ -34,8 +35,8 @@ export default class NumericButton extends Button<{ isPressed: boolean }> {
   async preload(size: ImageSize) {
     const path = `assets/Numeric/${this.number}.png`
 
-    this.initialButtonImage = await Image.load(path, size)
-    this.pressedButtonImage = await Image.load(path, size, RED)
+    this.initialButtonImage = await app.imageLoader.get(path, size)
+    this.pressedButtonImage = await app.imageLoader.get(path, size, RED)
   }
 
   onPress() {
@@ -58,7 +59,7 @@ export default class NumericButton extends Button<{ isPressed: boolean }> {
     }
   }
 
-  render(): Image {
+  render(): StreamDeckImage {
     if (this.state && this.state.isPressed) {
       return this.pressedButtonImage
     }

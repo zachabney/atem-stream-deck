@@ -1,13 +1,13 @@
 import ComputerButton from './computerButton'
 import LogoButton from './logoButton'
-import Tile from '../tile'
-import Screen from '../screen'
 import BlackButton from './blackButton'
 import VolumeButton from './volumeButton'
 import SettingsButton from './settingsButton'
+import StreamDeckTile from '../stream-deck/stream-deck-tile'
+import StreamDeckScreen from '../stream-deck/stream-deck-screen'
 
-export default class ControlScreen extends Screen {
-  private tiles: Tile[] = [
+export default class ControlScreen extends StreamDeckScreen {
+  private tiles: StreamDeckTile[] = [
     {
       index: 4,
       button: new VolumeButton()
@@ -30,7 +30,7 @@ export default class ControlScreen extends Screen {
     }
   ]
 
-  getTiles(): Tile[] {
+  getTiles(): StreamDeckTile[] {
     return this.tiles
   }
 }

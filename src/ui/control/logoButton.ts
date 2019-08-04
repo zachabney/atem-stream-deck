@@ -1,8 +1,8 @@
-import Button from '../button'
-import Image from '../image/image'
-import ImageSize from '../image/image-size'
+import StreamDeckButton from '../stream-deck/stream-deck-button'
+import app from '../../app'
+import { ImageSize } from 'tile-ui'
 
-export default class LogoButton extends Button {
+export default class LogoButton extends StreamDeckButton {
   onPress() {
     console.log('LOGO PRESSED')
   }
@@ -12,6 +12,6 @@ export default class LogoButton extends Button {
   }
 
   async render(size: ImageSize) {
-    return await Image.load('assets/Logo.png', size)
+    return await app.imageLoader.get('assets/Logo.png', size)
   }
 }
