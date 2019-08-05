@@ -1,11 +1,9 @@
-import app from '../../app'
 import ControlScreen from '../control/control-screen'
-import { ImageSize } from 'tile-ui'
-import { StreamDeckButton } from 'stream-deck-tile-ui'
+import { ImageSize, ButtonComponent } from 'tile-ui'
 
-export default class BackButton extends StreamDeckButton {
+export default class BackButton extends ButtonComponent {
   onPress() {
-    app.uiController.setScreen(new ControlScreen())
+    this.uiController.setScreen(new ControlScreen(this.uiController))
   }
 
   onRelease() {
@@ -13,6 +11,6 @@ export default class BackButton extends StreamDeckButton {
   }
 
   async render(size: ImageSize) {
-    return await app.imageLoader.get('assets/Back Arrow.png', size)
+    return await this.imageLoader.get('assets/Back Arrow.png', size)
   }
 }

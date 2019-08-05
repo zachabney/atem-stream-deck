@@ -1,7 +1,5 @@
-import { ImageSize, Button } from 'tile-ui'
-import app from '../../app'
+import { ImageSize, ButtonComponent, ImageLoader, UIImage, UIScreen } from 'tile-ui'
 import { RED, BLUE } from '../colors'
-import { StreamDeckButton, StreamDeckImage } from 'stream-deck-tile-ui'
 
 export type NumericButtonListener = (button: NumericButton) => void
 
@@ -10,24 +8,26 @@ type ButtonState = {
   hasError: boolean
 }
 
-export default class NumericButton extends StreamDeckButton<ButtonState> {
+export default class NumericButton extends ButtonComponent<ButtonState> {
   readonly number: number
 
   private onPressListener?: NumericButtonListener
   private onReleaseListener?: NumericButtonListener
 
-  private initialButtonImage!: StreamDeckImage
-  private pressedButtonImage!: StreamDeckImage
-  private errorButtonImage!: StreamDeckImage
+  private initialButtonImage!: UIImage
+  private pressedButtonImage!: UIImage
+  private errorButtonImage!: UIImage
 
   private errorTimeout?: NodeJS.Timeout
 
   constructor(
+    screen: UIScreen,
     number: number,
     onPressListener?: NumericButtonListener,
     onReleaseListener?: NumericButtonListener
   ) {
-    super()
+    super(screen)
+
     this.number = number
     this.onPressListener = onPressListener
     this.onReleaseListener = onReleaseListener
@@ -43,9 +43,9 @@ export default class NumericButton extends StreamDeckButton<ButtonState> {
   async preload(size: ImageSize) {
     const path = `assets/Numeric/${this.number}.png`
 
-    this.initialButtonImage = await app.imageLoader.get(path, size)
-    this.pressedButtonImage = await app.imageLoader.get(path, size, BLUE)
-    this.errorButtonImage = await app.imageLoader.get(path, size, RED)
+    this.initialButtonImage = await this.imageLoader.get(path, size)
+    this.pressedButtonImage = await this.imageLoader.get(path, size, BLUE)
+    this.errorButtonImage = await this.imageLoader.get(path, size, RED)
   }
 
   private isDisabled() {
@@ -116,7 +116,7 @@ export default class NumericButton extends StreamDeckButton<ButtonState> {
     }
   }
 
-  render(): StreamDeckImage {
+  render(): UIImage {
     if (this.state.isPressed) {
       return this.pressedButtonImage
     }

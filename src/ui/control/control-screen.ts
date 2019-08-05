@@ -3,33 +3,33 @@ import LogoButton from './logo-button'
 import BlackButton from './black-button'
 import VolumeButton from './volume-button'
 import SettingsButton from './settings-button'
-import { StreamDeckScreen, StreamDeckTile } from 'stream-deck-tile-ui'
+import { Tile, UIScreen } from 'tile-ui'
 
-export default class ControlScreen extends StreamDeckScreen {
-  private tiles: StreamDeckTile[] = [
+export default class ControlScreen extends UIScreen {
+  private tiles: Tile[] = [
     {
       index: 4,
-      button: new VolumeButton()
+      component: new VolumeButton(this)
     },
     {
       index: 6,
-      button: new BlackButton()
+      component: new BlackButton(this)
     },
     {
       index: 7,
-      button: new LogoButton()
+      component: new LogoButton(this)
     },
     {
       index: 8,
-      button: new ComputerButton()
+      component: new ComputerButton(this)
     },
     {
       index: 14,
-      button: new SettingsButton()
+      component: new SettingsButton(this)
     }
   ]
 
-  getTiles(): StreamDeckTile[] {
+  getTiles(): Tile[] {
     return this.tiles
   }
 }

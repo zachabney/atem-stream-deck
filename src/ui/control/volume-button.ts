@@ -1,8 +1,6 @@
-import { ImageSize, RGBColor } from 'tile-ui'
-import app from '../../app'
-import { StreamDeckButton } from 'stream-deck-tile-ui'
+import { ImageSize, ButtonComponent } from 'tile-ui'
 
-export default class VolumeButton extends StreamDeckButton {
+export default class VolumeButton extends ButtonComponent {
   onPress() {
     console.log('VOLUME PRESSED')
   }
@@ -12,6 +10,6 @@ export default class VolumeButton extends StreamDeckButton {
   }
 
   async render(size: ImageSize) {
-    return await app.imageLoader.get('assets/Speaker.png', size)
+    return await this.imageLoader.get('assets/Speaker.png', size)
   }
 }

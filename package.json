@@ -23,7 +23,6 @@
     "dotenv": "^8.0.0",
     "elgato-stream-deck": "^3.0.0",
     "source-map-support": "^0.5.13",
-    "stream-deck-tile-ui": "file:../stream-deck-tile-ui",
     "tile-ui": "file:../tile-ui"
   },
   "devDependencies": {

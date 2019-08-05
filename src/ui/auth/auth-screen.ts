@@ -1,11 +1,11 @@
 import BackButton from './back-button'
 import NumericButton from './numeric-button'
-import { StreamDeckScreen, StreamDeckTile } from 'stream-deck-tile-ui'
 import config from '../../config'
+import { Tile, UIScreen } from 'tile-ui'
 
-type NumericTile = StreamDeckTile & { button: NumericButton }
+type NumericTile = Tile & { component: NumericButton }
 
-export default class AuthScreen extends StreamDeckScreen {
+export default class AuthScreen extends UIScreen {
   private numericCode: number[] = config.authCode
   private enteredCode: number[] = []
 
@@ -28,57 +28,57 @@ export default class AuthScreen extends StreamDeckScreen {
   private numericTiles: NumericTile[] = [
     {
       index: 2,
-      button: new NumericButton(1, this.handleNumericInput)
+      component: new NumericButton(this, 1, this.handleNumericInput)
     },
     {
       index: 3,
-      button: new NumericButton(2, this.handleNumericInput)
+      component: new NumericButton(this, 2, this.handleNumericInput)
     },
     {
       index: 4,
-      button: new NumericButton(3, this.handleNumericInput)
+      component: new NumericButton(this, 3, this.handleNumericInput)
     },
     {
       index: 7,
-      button: new NumericButton(4, this.handleNumericInput)
+      component: new NumericButton(this, 4, this.handleNumericInput)
     },
     {
       index: 8,
-      button: new NumericButton(5, this.handleNumericInput)
+      component: new NumericButton(this, 5, this.handleNumericInput)
     },
     {
       index: 9,
-      button: new NumericButton(6, this.handleNumericInput)
+      component: new NumericButton(this, 6, this.handleNumericInput)
     },
     {
       index: 11,
-      button: new NumericButton(0, this.handleNumericInput)
+      component: new NumericButton(this, 0, this.handleNumericInput)
     },
     {
       index: 12,
-      button: new NumericButton(7, this.handleNumericInput)
+      component: new NumericButton(this, 7, this.handleNumericInput)
     },
     {
       index: 13,
-      button: new NumericButton(8, this.handleNumericInput)
+      component: new NumericButton(this, 8, this.handleNumericInput)
     },
     {
       index: 14,
-      button: new NumericButton(9, this.handleNumericInput)
+      component: new NumericButton(this, 9, this.handleNumericInput)
     }
   ]
 
-  private tiles: StreamDeckTile[] = [
+  private tiles: Tile[] = [
     {
       index: 10,
-      button: new BackButton()
+      component: new BackButton(this)
     },
     ...this.numericTiles
   ]
 
   private showBadError() {
     this.clearEnteredCode()
-    this.numericTiles.forEach(numericTile => numericTile.button.showError(1000))
+    this.numericTiles.forEach(numericTile => numericTile.component.showError(1000))
   }
 
   private showSuccess() {
@@ -89,7 +89,7 @@ export default class AuthScreen extends StreamDeckScreen {
     this.enteredCode = []
   }
 
-  getTiles(): StreamDeckTile[] {
+  getTiles(): Tile[] {
     return this.tiles
   }
 }
