@@ -1,6 +1,6 @@
-import { ImageSize, ButtonComponent } from 'tile-ui'
+import { ImageSize, StaticImageComponent } from 'tile-ui'
 
-export default class BlackButton extends ButtonComponent {
+export default class BlackButton extends StaticImageComponent {
   onPress() {
     console.log('BLACK BUTTON')
   }
@@ -9,7 +9,7 @@ export default class BlackButton extends ButtonComponent {
     console.log('BLACK RELEASED')
   }
 
-  async render(size: ImageSize) {
+  async getImage(size: ImageSize) {
     return await this.imageLoader.get('assets/Black.png', size)
   }
 }

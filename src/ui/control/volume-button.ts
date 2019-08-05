@@ -1,6 +1,6 @@
-import { ImageSize, ButtonComponent } from 'tile-ui'
+import { ImageSize, StaticImageComponent } from 'tile-ui'
 
-export default class VolumeButton extends ButtonComponent {
+export default class VolumeButton extends StaticImageComponent {
   onPress() {
     console.log('VOLUME PRESSED')
   }
@@ -9,7 +9,7 @@ export default class VolumeButton extends ButtonComponent {
     console.log('VOLUME RELEASED')
   }
 
-  async render(size: ImageSize) {
+  async getImage(size: ImageSize) {
     return await this.imageLoader.get('assets/Speaker.png', size)
   }
 }

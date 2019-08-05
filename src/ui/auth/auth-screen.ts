@@ -2,6 +2,7 @@ import BackButton from './back-button'
 import NumericButton from './numeric-button'
 import config from '../../config'
 import { Tile, UIScreen } from 'tile-ui'
+import SettingsScreen from '../settings/settings-screen'
 
 type NumericTile = Tile & { component: NumericButton }
 
@@ -21,7 +22,7 @@ export default class AuthScreen extends UIScreen {
         }
       }
 
-      this.showSuccess()
+      this.handleSuccess()
     }
   }
 
@@ -81,8 +82,8 @@ export default class AuthScreen extends UIScreen {
     this.numericTiles.forEach(numericTile => numericTile.component.showError(1000))
   }
 
-  private showSuccess() {
-    this.clearEnteredCode()
+  private handleSuccess() {
+    this.uiController.setScreen(new SettingsScreen(this.uiController))
   }
 
   private clearEnteredCode() {

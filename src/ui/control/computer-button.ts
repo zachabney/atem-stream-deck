@@ -1,6 +1,6 @@
-import { ImageSize, ButtonComponent } from 'tile-ui'
+import { ImageSize, StaticImageComponent } from 'tile-ui'
 
-export default class ComputerButton extends ButtonComponent {
+export default class ComputerButton extends StaticImageComponent {
   onPress() {
     console.log('COMPUTER PRESSED')
   }
@@ -9,7 +9,7 @@ export default class ComputerButton extends ButtonComponent {
     console.log('COMPUTER RELEASED')
   }
 
-  async render(size: ImageSize) {
+  async getImage(size: ImageSize) {
     return await this.imageLoader.get('assets/Computer.png', size)
   }
 }

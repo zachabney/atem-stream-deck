@@ -6,8 +6,8 @@ require('./config')
 import { openStreamDeck } from 'elgato-stream-deck'
 import ControlScreen from './ui/control/control-screen'
 import { DARK_GRAY } from './ui/colors'
-import { StreamDeckUIController } from 'tile-ui'
 import FlattenedImageLoader from './ui/flattened-image-loader'
+import StreamDeckUIController from './ui/stream-deck-ui-controller'
 
 ;(async () => {
   const streamDeck = openStreamDeck()

@@ -11,7 +11,6 @@ export class Config {
   }
 
   static load() {
-    console.log('LOADING CONFIG')
     const atemHost = Config.get('ATEM_HOST')
     const authCode = this.getAuthCode()
 

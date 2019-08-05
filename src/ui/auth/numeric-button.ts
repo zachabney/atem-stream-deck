@@ -1,4 +1,4 @@
-import { ImageSize, ButtonComponent, ImageLoader, UIImage, UIScreen } from 'tile-ui'
+import { ImageSize, UIImage, UIScreen, Component } from 'tile-ui'
 import { RED, BLUE } from '../colors'
 
 export type NumericButtonListener = (button: NumericButton) => void
@@ -8,7 +8,7 @@ type ButtonState = {
   hasError: boolean
 }
 
-export default class NumericButton extends ButtonComponent<ButtonState> {
+export default class NumericButton extends Component<ButtonState> {
   readonly number: number
 
   private onPressListener?: NumericButtonListener

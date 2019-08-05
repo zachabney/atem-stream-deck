@@ -1,6 +1,6 @@
-import { ImageSize, ButtonComponent } from 'tile-ui'
+import { ImageSize, StaticImageComponent } from 'tile-ui'
 
-export default class LogoButton extends ButtonComponent {
+export default class LogoButton extends StaticImageComponent {
   onPress() {
     console.log('LOGO PRESSED')
   }
@@ -9,7 +9,7 @@ export default class LogoButton extends ButtonComponent {
     console.log('LOGO RELEASED')
   }
 
-  async render(size: ImageSize) {
+  async getImage(size: ImageSize) {
     return await this.imageLoader.get('assets/Logo.png', size)
   }
 }
