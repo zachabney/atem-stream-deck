@@ -1,5 +1,5 @@
-import AuthScreen from '../auth/auth-screen'
 import { ImageSize, StaticImageComponent } from 'tile-ui'
+import AuthScreen from '../auth/auth-screen'
 
 export default class SettingsControlButton extends StaticImageComponent {
   onPress() {

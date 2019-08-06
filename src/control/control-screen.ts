@@ -7,7 +7,7 @@ import { Tile, UIScreen, UIController } from 'tile-ui'
 import config from '../config'
 
 export default class ControlScreen extends UIScreen {
-  private tiles: Tile[] = [
+  tiles: Tile[] = [
     {
       index: 14,
       component: new SettingsControlButton(this)

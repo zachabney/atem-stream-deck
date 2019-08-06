@@ -11,7 +11,7 @@ export const BACKGROUND_COLOR = RED
 export default class SettingsScreen extends UIScreen {
   private disabledComponent = new StaticColorComponent(BACKGROUND_COLOR, this)
 
-  private tiles: Tile[] = []
+  tiles: Tile[] = []
 
   constructor(uiController: UIController) {
     super(uiController)
@@ -45,9 +45,5 @@ export default class SettingsScreen extends UIScreen {
       }
       this.tiles.push(tile)
     }
-  }
-
-  getTiles(): Tile[] {
-    return this.tiles
   }
 }

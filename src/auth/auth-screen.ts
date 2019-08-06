@@ -69,7 +69,7 @@ export default class AuthScreen extends UIScreen {
     }
   ]
 
-  private tiles: Tile[] = [
+  tiles: Tile[] = [
     {
       index: 10,
       component: new AuthBackButton(this)
