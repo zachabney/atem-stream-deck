@@ -1,7 +1,5 @@
 import { FSImageLoader, RGBColor, ImageSize } from 'tile-ui'
 
-const BLACK = { r: 0, g: 0, b: 0 }
-
 export default class FlattenedImageLoader extends FSImageLoader {
   private defaultBackgroundColor: RGBColor
 

@@ -4,11 +4,10 @@ install()
 require('./config')
 
 import { openStreamDeck } from 'elgato-stream-deck'
-import ControlScreen from './ui/control/control-screen'
-import { DARK_GRAY } from './ui/colors'
-import FlattenedImageLoader from './ui/flattened-image-loader'
-import StreamDeckUIController from './ui/stream-deck-ui-controller'
-
+import ControlScreen from './control/control-screen'
+import { DARK_GRAY } from './colors'
+import FlattenedImageLoader from './flattened-image-loader'
+import StreamDeckUIController from './stream-deck-ui-controller'
 ;(async () => {
   const streamDeck = openStreamDeck()
 

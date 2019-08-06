@@ -1,6 +1,6 @@
 import ToggleButton from './toggle-button'
 import { UIScreen } from 'tile-ui'
-import config from '../../config'
+import config from '../config'
 
 export default class ComputerToggleButton extends ToggleButton {
   constructor(screen: UIScreen) {

@@ -4,7 +4,7 @@ import BlackControlButton from './black-control-button'
 import VolumeControlButton from './volume-control-button'
 import SettingsControlButton from './settings-control-button'
 import { Tile, UIScreen, UIController } from 'tile-ui'
-import config from '../../config'
+import config from '../config'
 
 export default class ControlScreen extends UIScreen {
   private tiles: Tile[] = [

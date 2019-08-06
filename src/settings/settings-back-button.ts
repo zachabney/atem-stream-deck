@@ -1,7 +1,7 @@
 import { ImageSize, UIImage, StaticImageComponent } from 'tile-ui'
 import { BACKGROUND_COLOR } from './settings-screen'
 import ControlScreen from '../control/control-screen'
-import config from '../../config'
+import config from '../config'
 
 export default class SettingsBackButton extends StaticImageComponent {
   onPress() {

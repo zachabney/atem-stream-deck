@@ -1,6 +1,6 @@
 import AuthBackButton from './auth-back-button'
 import NumericButton from './numeric-button'
-import config from '../../config'
+import config from '../config'
 import { Tile, UIScreen } from 'tile-ui'
 import SettingsScreen from '../settings/settings-screen'
 
