@@ -10,6 +10,7 @@ export class Config {
   blackEnabled: boolean
   logoEnabled: boolean
   computerEnabled: boolean
+  computerSource: number
 
   constructor({
     atemHost = '10.10.20.2',
@@ -17,7 +18,8 @@ export class Config {
     volumeEnabled = true,
     blackEnabled = true,
     logoEnabled = true,
-    computerEnabled = true
+    computerEnabled = true,
+    computerSource = 1
   }: {
     atemHost?: string
     authCode?: string
@@ -25,6 +27,7 @@ export class Config {
     blackEnabled?: boolean
     logoEnabled?: boolean
     computerEnabled?: boolean
+    computerSource?: number
   } = {}) {
     this.atemHost = atemHost
     this.authCode = authCode
@@ -32,6 +35,7 @@ export class Config {
     this.blackEnabled = blackEnabled
     this.logoEnabled = logoEnabled
     this.computerEnabled = computerEnabled
+    this.computerSource = computerSource
   }
 
   async save() {

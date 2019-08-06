@@ -10,11 +10,11 @@ export default class ControlScreen extends UIScreen {
   tiles: Tile[] = [
     {
       index: 14,
-      component: new NavigationButton(
-        this,
-        () => new AuthScreen(this.uiController),
-        'assets/Settings.png'
-      )
+      component: new NavigationButton({
+        screen: this,
+        destination: () => new AuthScreen(this.uiController),
+        imagePath: 'assets/Settings.png'
+      })
     }
   ]
 
@@ -45,7 +45,7 @@ export default class ControlScreen extends UIScreen {
     if (config.computerEnabled) {
       this.tiles.push({
         index: 8,
-        component: new InputButtonComponent(this, AtemInput.CAMERA_1, 'assets/Computer.png')
+        component: new InputButtonComponent(this, config.computerSource, 'assets/Computer.png')
       })
     }
   }

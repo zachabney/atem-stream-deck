@@ -1,28 +1,35 @@
-import { ImageSize, StaticImageComponent, UIImage, UIScreen, RGBColor } from 'tile-ui'
+import { StaticImageComponent, UIScreen, RGBColor } from 'tile-ui'
+
+export type OnNavigateListener = () => void
 
 export default class NavigationButton extends StaticImageComponent {
   private destination: () => UIScreen
-  private imagePath: string
-  private backgroundColor?: RGBColor
+  private onNavigateListener?: OnNavigateListener
 
-  constructor(
-    screen: UIScreen,
-    destination: () => UIScreen,
-    imagePath: string,
+  constructor({
+    screen,
+    destination,
+    imagePath,
+    backgroundColor,
+    onNavigateListener
+  }: {
+    screen: UIScreen
+    destination: () => UIScreen
+    imagePath: string
     backgroundColor?: RGBColor
-  ) {
-    super(screen)
+    onNavigateListener?: OnNavigateListener
+  }) {
+    super(screen, imagePath, backgroundColor)
     this.destination = destination
-    this.imagePath = imagePath
-    this.backgroundColor = backgroundColor
+    this.onNavigateListener = onNavigateListener
   }
 
   onPress() {
     const destinationScreen = this.destination()
-    this.uiController.setScreen(destinationScreen)
-  }
+    if (this.onNavigateListener) {
+      this.onNavigateListener()
+    }
 
-  async getImage(size: ImageSize): Promise<UIImage> {
-    return await this.imageLoader.get(this.imagePath, size, this.backgroundColor)
+    this.uiController.setScreen(destinationScreen)
   }
 }

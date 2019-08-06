@@ -12,7 +12,6 @@ export enum AtemInput {
   CAMERA_7 = 7,
   CAMERA_8 = 8,
   CAMERA_9 = 9,
-  CAMERA_10 = 10,
   COLOR_1 = 2001,
   COLOR_2 = 2002,
   MEDIA_PLAYER_1 = 3010,

@@ -4,5 +4,6 @@
     "volumeEnabled": true,
     "blackEnabled": true,
     "logoEnabled": true,
-    "computerEnabled": true
+    "computerEnabled": true,
+    "computerSource": 3
 }

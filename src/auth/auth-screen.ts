@@ -74,7 +74,10 @@ export default class AuthScreen extends UIScreen {
   tiles: Tile[] = [
     {
       index: 10,
-      component: new BackButton(this, () => new ControlScreen(this.uiController))
+      component: new BackButton({
+        screen: this,
+        destination: () => new ControlScreen(this.uiController)
+      })
     },
     ...this.numericTiles
   ]
