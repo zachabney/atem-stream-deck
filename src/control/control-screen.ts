@@ -1,15 +1,20 @@
 import VolumeControlButton from './volume-control-button'
-import SettingsControlButton from './settings-control-button'
 import { Tile, UIScreen, UIController } from 'tile-ui'
 import config from '../config'
 import InputButtonComponent from './input-button'
 import { AtemInput } from '../atem-connection'
+import NavigationButton from '../components/navigation-button'
+import AuthScreen from '../auth/auth-screen'
 
 export default class ControlScreen extends UIScreen {
   tiles: Tile[] = [
     {
       index: 14,
-      component: new SettingsControlButton(this)
+      component: new NavigationButton(
+        this,
+        () => new AuthScreen(this.uiController),
+        'assets/Settings.png'
+      )
     }
   ]
 

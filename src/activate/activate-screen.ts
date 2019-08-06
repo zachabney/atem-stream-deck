@@ -1,14 +1,15 @@
 import { UIScreen, Tile, StaticColorComponent, UIController, Component } from 'tile-ui'
 import { RED } from '../colors'
 import VolumeToggleButton from './volume-toggle-button'
-import SettingsBackButton from './settings-back-button'
 import BlackToggleButton from './black-toggle-button'
 import LogoToggleButton from './logo-toggle-button'
 import ComputerToggleButton from './computer-toggle-button'
+import BackButton from '../components/back-button'
+import HomeScreen from '../home/home-screen'
 
 export const BACKGROUND_COLOR = RED
 
-export default class SettingsScreen extends UIScreen {
+export default class ActivateScreen extends UIScreen {
   private disabledComponent = new StaticColorComponent(BACKGROUND_COLOR, this)
 
   tiles: Tile[] = []
@@ -33,7 +34,11 @@ export default class SettingsScreen extends UIScreen {
           component = new ComputerToggleButton(this)
           break
         case 10:
-          component = new SettingsBackButton(this)
+          component = new BackButton(
+            this,
+            () => new HomeScreen(this.uiController),
+            BACKGROUND_COLOR
+          )
           break
         default:
           component = this.disabledComponent

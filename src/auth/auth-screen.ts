@@ -1,8 +1,10 @@
-import AuthBackButton from './auth-back-button'
 import NumericButton from './numeric-button'
 import config from '../config'
 import { Tile, UIScreen } from 'tile-ui'
-import SettingsScreen from '../settings/settings-screen'
+import ActivateScreen from '../activate/activate-screen'
+import BackButton from '../components/back-button'
+import ControlScreen from '../control/control-screen'
+import HomeScreen from '../home/home-screen'
 
 type NumericTile = Tile & { component: NumericButton }
 
@@ -72,7 +74,7 @@ export default class AuthScreen extends UIScreen {
   tiles: Tile[] = [
     {
       index: 10,
-      component: new AuthBackButton(this)
+      component: new BackButton(this, () => new ControlScreen(this.uiController))
     },
     ...this.numericTiles
   ]
@@ -83,7 +85,7 @@ export default class AuthScreen extends UIScreen {
   }
 
   private handleSuccess() {
-    this.uiController.setScreen(new SettingsScreen(this.uiController))
+    this.uiController.setScreen(new HomeScreen(this.uiController))
   }
 
   private clearEnteredCode() {
