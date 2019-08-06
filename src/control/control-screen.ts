@@ -1,10 +1,9 @@
-import ComputerControlButton from './computer-control-button'
-import LogoControlButton from './logo-control-button'
-import BlackControlButton from './black-control-button'
 import VolumeControlButton from './volume-control-button'
 import SettingsControlButton from './settings-control-button'
 import { Tile, UIScreen, UIController } from 'tile-ui'
 import config from '../config'
+import InputButtonComponent from './input-button'
+import { AtemInput } from '../atem-connection'
 
 export default class ControlScreen extends UIScreen {
   tiles: Tile[] = [
@@ -27,21 +26,21 @@ export default class ControlScreen extends UIScreen {
     if (config.blackEnabled) {
       this.tiles.push({
         index: 6,
-        component: new BlackControlButton(this)
+        component: new InputButtonComponent(this, AtemInput.BLACK, 'assets/Black.png')
       })
     }
 
     if (config.logoEnabled) {
       this.tiles.push({
         index: 7,
-        component: new LogoControlButton(this)
+        component: new InputButtonComponent(this, AtemInput.MEDIA_PLAYER_1, 'assets/Logo.png')
       })
     }
 
     if (config.computerEnabled) {
       this.tiles.push({
         index: 8,
-        component: new ComputerControlButton(this)
+        component: new InputButtonComponent(this, AtemInput.CAMERA_1, 'assets/Computer.png')
       })
     }
   }
