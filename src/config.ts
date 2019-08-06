@@ -1,38 +1,67 @@
-import { config as envConfig } from 'dotenv'
-envConfig()
+import fs from 'fs'
+import path from 'path'
+
+const CONFIG_FILE = path.resolve('config.json')
 
 export class Config {
-  readonly atemHost: string
-  readonly authCode: number[]
+  atemHost: string
+  authCode: string
+  volumeEnabled: boolean
+  blackEnabled: boolean
+  logoEnabled: boolean
+  computerEnabled: boolean
 
-  private constructor(atemHost: string, authCode: number[]) {
+  constructor({
+    atemHost = '10.10.20.2',
+    authCode = '1234',
+    volumeEnabled = true,
+    blackEnabled = true,
+    logoEnabled = true,
+    computerEnabled = true
+  }: {
+    atemHost?: string
+    authCode?: string
+    volumeEnabled?: boolean
+    blackEnabled?: boolean
+    logoEnabled?: boolean
+    computerEnabled?: boolean
+  } = {}) {
     this.atemHost = atemHost
     this.authCode = authCode
+    this.volumeEnabled = volumeEnabled
+    this.blackEnabled = blackEnabled
+    this.logoEnabled = logoEnabled
+    this.computerEnabled = computerEnabled
   }
 
-  static load() {
-    const atemHost = Config.get('ATEM_HOST')
-    const authCode = this.getAuthCode()
+  async save() {
+    const json = JSON.stringify(this, null, 4)
+    await new Promise<void>(resolve => {
+      fs.writeFile(CONFIG_FILE, json, err => {
+        if (err) {
+          console.error('An error occurred while trying to save the config file', err)
+        }
 
-    return new Config(atemHost, authCode)
+        resolve()
+      })
+    })
   }
 
-  private static getAuthCode(): number[] {
-    const codeString: string = Config.get('AUTH_CODE')
-    const codeStringArray: string[] = codeString.split('')
-    const numericCode = codeStringArray.map(digit => +digit)
-    return numericCode
-  }
+  static load(): Config {
+    try {
+      const data = fs.readFileSync(CONFIG_FILE)
+      const values = JSON.parse(data.toString())
+      return new Config(values)
+    } catch (err) {
+      const defaultConfig = new Config()
+      if (err.code === 'ENOENT') {
+        defaultConfig.save()
+      } else {
+        console.error('An error occurred while reading the config file', err)
+      }
 
-  private static get(name: string): string {
-    const value = process.env[name]
-
-    if (!value) {
-      console.error(`${name} environment variable was not set`)
-      return process.exit(-1)
+      return defaultConfig
     }
-
-    return value
   }
 }
 

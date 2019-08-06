@@ -26,18 +26,14 @@ export default class NumericButton extends Component<ButtonState> {
     onPressListener?: NumericButtonListener,
     onReleaseListener?: NumericButtonListener
   ) {
-    super(screen)
+    super(screen, {
+      isPressed: false,
+      hasError: false
+    })
 
     this.number = number
     this.onPressListener = onPressListener
     this.onReleaseListener = onReleaseListener
-  }
-
-  getInitialState() {
-    return {
-      isPressed: false,
-      hasError: false
-    }
   }
 
   async preload(size: ImageSize) {

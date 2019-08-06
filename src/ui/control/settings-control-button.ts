@@ -1,13 +1,9 @@
 import AuthScreen from '../auth/auth-screen'
 import { ImageSize, StaticImageComponent } from 'tile-ui'
 
-export default class SettingsButton extends StaticImageComponent {
+export default class SettingsControlButton extends StaticImageComponent {
   onPress() {
     this.uiController.setScreen(new AuthScreen(this.uiController))
-  }
-
-  onRelease() {
-    console.log('SETTINGS RELEASED')
   }
 
   async getImage(size: ImageSize) {

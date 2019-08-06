@@ -1,7 +1,10 @@
 import { UIScreen, Tile, StaticColorComponent, UIController, Component } from 'tile-ui'
 import { RED } from '../colors'
-import SpeakerButton from './speaker-button'
-import BackButton from './back-button'
+import VolumeToggleButton from './volume-toggle-button'
+import SettingsBackButton from './settings-back-button'
+import BlackToggleButton from './black-toggle-button'
+import LogoToggleButton from './logo-toggle-button'
+import ComputerToggleButton from './computer-toggle-button'
 
 export const BACKGROUND_COLOR = RED
 
@@ -18,10 +21,19 @@ export default class SettingsScreen extends UIScreen {
       let component: Component
       switch (tileIndex) {
         case 4:
-          component = new SpeakerButton(this)
+          component = new VolumeToggleButton(this)
+          break
+        case 6:
+          component = new BlackToggleButton(this)
+          break
+        case 7:
+          component = new LogoToggleButton(this)
+          break
+        case 8:
+          component = new ComputerToggleButton(this)
           break
         case 10:
-          component = new BackButton(this)
+          component = new SettingsBackButton(this)
           break
         default:
           component = this.disabledComponent
