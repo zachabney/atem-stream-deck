@@ -10,6 +10,7 @@ const isAtemVolumeOn = (atemState: AtemState = atem.state) => {
 export default class VolumeControlButton extends Component<{ isOn: boolean }> {
   private onImage!: UIImage
   private offImage!: UIImage
+  private ignoreStateChanges = false
 
   constructor(screen: UIScreen) {
     super(screen, {
@@ -18,6 +19,10 @@ export default class VolumeControlButton extends Component<{ isOn: boolean }> {
   }
 
   private atemStateChangeListener = (atemState: AtemState) => {
+    if (this.ignoreStateChanges) {
+      return
+    }
+
     const atemOnStatus = isAtemVolumeOn(atemState)
     if (atemOnStatus !== this.state.isOn) {
       this.setState(() => {
@@ -38,14 +43,16 @@ export default class VolumeControlButton extends Component<{ isOn: boolean }> {
 
   async onPress() {
     const newOnState = !this.state.isOn
-    const newMixOption: AudioMixOption = newOnState ? AudioMixOption.On : AudioMixOption.Off
-    await atem.setAudioMixerInputMixOption(AtemInput.CAMERA_1, newMixOption)
-
     this.setState(() => {
       return {
         isOn: newOnState
       }
     })
+
+    this.ignoreStateChanges = true
+    const newMixOption: AudioMixOption = newOnState ? AudioMixOption.On : AudioMixOption.Off
+    await atem.setAudioMixerInputMixOption(AtemInput.CAMERA_1, newMixOption)
+    this.ignoreStateChanges = false
   }
 
   async preload(size: ImageSize) {

@@ -7,6 +7,7 @@ export default class InputButtonComponent extends SelectableComponent {
   protected selectedColor = SELECTED
   private input: AtemInput
   private imagePath: string
+  private ignoreStateChanges = false
 
   constructor(screen: UIScreen, input: AtemInput, imagePath: string) {
     super(screen, { selected: isAtemInputLive(input) })
@@ -15,6 +16,14 @@ export default class InputButtonComponent extends SelectableComponent {
   }
 
   private atemStateChangeListener = (atemState: AtemState) => {
+    if (this.ignoreStateChanges) {
+      return
+    }
+
+    if (isTransitioning()) {
+      return
+    }
+
     const atemInputSelected = isAtemInputLive(this.input, atemState)
     if (atemInputSelected !== this.state.selected) {
       this.setState(() => {
@@ -38,8 +47,17 @@ export default class InputButtonComponent extends SelectableComponent {
       return
     }
 
+    this.setState(() => {
+      return {
+        selected: true
+      }
+    })
+
+    // ignore state changes when changing preview to prevent preview change from deselecting button prematurely
+    this.ignoreStateChanges = true
     await atem.changePreviewInput(this.input)
     await atem.autoTransition()
+    this.ignoreStateChanges = false
   }
 
   getImagePath() {

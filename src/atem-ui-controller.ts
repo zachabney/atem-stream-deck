@@ -1,5 +1,5 @@
 import config from './config'
-import { ImageLoader, StreamDeckUIController, ImageSize } from 'tile-ui'
+import { ImageLoader, StreamDeckUIController, ImageSize, BlankScreen } from 'tile-ui'
 import ControlScreen from './control/control-screen'
 import NoConnectionScreen from './no-connection/no-connection-screen'
 import { StreamDeck } from 'elgato-stream-deck'
@@ -7,6 +7,7 @@ import atem from './atem-connection'
 
 export default class AtemUIController extends StreamDeckUIController {
   private _isConnected = false
+  private splashScreenTimeout: NodeJS.Timeout
 
   constructor(streamDeck: StreamDeck, imageLoader: ImageLoader) {
     super(streamDeck, imageLoader)
@@ -15,9 +16,18 @@ export default class AtemUIController extends StreamDeckUIController {
     atem.on('disconnected', () => this.onDisconnected())
 
     this.showSplashScreen()
+    // show no connection if no success after 5 seconds
+    this.splashScreenTimeout = setTimeout(() => {
+      if (!this.isConnected()) {
+        this.streamDeck.clearAllKeys()
+        this.setScreen(new NoConnectionScreen(this))
+      }
+    }, 5000)
   }
 
   private async showSplashScreen() {
+    await this.setScreen(new BlankScreen(this))
+
     const size: ImageSize = {
       width: this.streamDeck.ICON_SIZE * this.streamDeck.KEY_COLUMNS,
       height: this.streamDeck.ICON_SIZE * this.streamDeck.KEY_ROWS
@@ -37,7 +47,7 @@ export default class AtemUIController extends StreamDeckUIController {
 
   private async onConnected() {
     this._isConnected = true
-    this.streamDeck.clearAllKeys()
+    clearTimeout(this.splashScreenTimeout)
     await this.setScreen(new ControlScreen(this))
   }
 

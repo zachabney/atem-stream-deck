@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "nodemon",
+    "clean": "rm -rf node_modules dist",
     "start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +24,7 @@
     "atem-connection": "^0.10.0",
     "elgato-stream-deck": "^3.0.0",
     "source-map-support": "^0.5.13",
+    "@julusian/jpeg-turbo": "^0.5.2",
     "tile-ui": "file:../tile-ui"
   },
   "devDependencies": {
