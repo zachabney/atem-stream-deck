@@ -1,9 +1,0 @@
-{
-    "atemHost": "10.10.20.2",
-    "authCode": "1234",
-    "volumeEnabled": true,
-    "blackEnabled": true,
-    "logoEnabled": true,
-    "computerEnabled": true,
-    "computerSource": 3
-}
